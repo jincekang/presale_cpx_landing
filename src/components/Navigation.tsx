@@ -56,7 +56,7 @@ const Navigation = () => {
 
           {/* Connect Wallet Button */}
           <div className="hidden md:block">
-            <Button variant="outline" className="gradient-border hover:bg-gradient-primary hover:text-primary-foreground w-full"
+            <Button variant="outline" className="gradient-border glow-primary hover:bg-gradient-primary hover:text-primary-foreground w-full"
               onClick={handleWalletConnect}>
               <Wallet className="w-4 h-4" />
               

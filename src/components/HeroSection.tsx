@@ -118,7 +118,7 @@ const HeroSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto animate-slide-up" style={{animationDelay: '0.6s'}}>
             {stats.map((stat, index) => (
               <div key={stat.label} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3 glow-primary">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3 glow-primary animate-pulse-glow">
                   <stat.icon className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div className="text-2xl font-bold text-gradient mb-1">{stat.value}</div>

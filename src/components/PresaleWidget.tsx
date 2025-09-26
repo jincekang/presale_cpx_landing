@@ -122,13 +122,13 @@ const PresaleWidget = () => {
 
                 {/* Current Stats */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-primary/20 rounded-lg">
+                  <div className="text-center p-4 bg-primary/20 rounded-lg glow-accent">
                     <div>
                       <div className="text-2xl font-bold text-gradient">${presaleData.currentPrice}</div>
                       <div className="text-sm text-muted-foreground">Current Price</div>
                     </div>
                   </div>
-                  <div className="text-center p-4 bg-primary/20 rounded-lg">
+                  <div className="text-center p-4 bg-primary/20 rounded-lg glow-accent animate-pulse-glow">
                     <div className="text-2xl font-bold text-gradient">${presaleData.nextPrice}</div>
                     <div className="text-sm text-muted-foreground">Next Stage</div>
                   </div>
@@ -186,8 +186,8 @@ const PresaleWidget = () => {
                             onClick={() => setSelectedPayment(method.symbol)}
                             className={`p-3 rounded-lg border text-center transition-all ${
                               selectedPayment === method.symbol
-                                ? 'border-primary bg-primary/20 glow-primary'
-                                : 'border-border hover:border-primary/50'
+                                ? 'border-primary bg-primary/30 glow-primary'
+                                : 'border-border hover:border-primary/90'
                             }`}
                           >
                             <div className="flex">
@@ -218,7 +218,7 @@ const PresaleWidget = () => {
 
                       <div>
                         <label className="text-sm font-medium mb-2 block">You'll Receive</label>
-                        <div className="p-3 bg-primary/20 rounded-lg">
+                        <div className="p-3 bg-primary/20 rounded-lg animate-pulse-glow">
                           <div className="text-lg font-semibold text-gradient">
                             {tokenAmount || "0"} CPX
                           </div>
