@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cryptocurrency Presale Design System - Modern Dark Theme with Neon Gradients */
+
+@layer base {
+  :root {
+    /* Dark theme base colors */
+    --background: 220 13% 8%;
+    --background-secondary: 220 15% 10%;
+    --background-card: 220 13% 12%;
+    --foreground: 210 20% 98%;
+    
+    /* Neon accent colors */
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 270 100% 70%;
+    --neon-blue: 220 100% 60%;
+    --neon-green: 145 100% 60%;
+    
+    /* Primary brand colors - Carbon Pepe X Green */
+    --primary: 158 64% 52%;
+    --primary-foreground: 210 20% 98%;
+    --primary-glow: 158 64% 62%;
+    
+    /* Secondary colors - Carbon Pepe X Blue */
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 210 20% 98%;
+    
+    /* Accent colors - Carbon Pepe X Amber */
+    --accent: 43 96% 56%;
+    --accent-foreground: 220 13% 8%;
+    --accent-glow: 43 96% 66%;
+    
+    /* Success/warning colors */
+    --success: 158 64% 52%;
+    --success-foreground: 220 13% 8%;
+    --warning: 43 96% 56%;
+    --warning-foreground: 220 13% 8%;
+    
+    /* UI element colors */
+    --muted: 220 13% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --card: 220 13% 12%;
+    --card-foreground: 210 20% 98%;
+    --popover: 220 13% 12%;
+    --popover-foreground: 210 20% 98%;
+    --border: 220 13% 20%;
+    --input: 220 13% 15%;
+    --ring: 270 100% 70%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 20% 98%;
+    
+    /* Gradients - Carbon Pepe X Theme */
+    --gradient-primary: linear-gradient(135deg, hsl(158 64% 52%), hsl(217 91% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(217 91% 60%), hsl(43 96% 56%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 13% 8%) 0%, hsl(158 64% 10%) 50%, hsl(217 91% 10%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 13% 12%) 0%, hsl(220 13% 15%) 100%);
+    --gradient-border: linear-gradient(135deg, hsl(158 64% 52%), hsl(217 91% 60%));
+    
+    /* Shadows and glows - Carbon Pepe X */
+    --glow-primary: 0 0 20px hsl(158 64% 52% / 0.3);
+    --glow-accent: 0 0 20px hsl(43 96% 56% / 0.3);
+    --glow-success: 0 0 20px hsl(158 64% 52% / 0.3);
+    --shadow-card: 0 8px 32px hsl(220 13% 8% / 0.5);
+    --shadow-elevated: 0 20px 40px hsl(220 13% 8% / 0.6);
+    
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease;
+    
+    /* Border radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--gradient-hero);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-glow));
+  }
+}
+
+/* Utility classes for crypto design */
+@layer utilities {
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+  
+  .glow-success {
+    box-shadow: var(--glow-success);
+  }
+  
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: var(--gradient-border);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    /* Ensure the decorative border layer never blocks interactions */
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: var(--glow-primary);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(270 100% 70% / 0.5);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: var(--glow-primary);
+  }
+  to {
+    box-shadow: 0 0 30px hsl(270 100% 70% / 0.6), 0 0 60px hsl(180 100% 50% / 0.3);
+  }
+}
