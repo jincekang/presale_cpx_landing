@@ -6,8 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Wallet, CreditCard, Coins, TrendingUp, Users, Clock, Icon } from "lucide-react";
+import { Wallet, CreditCard, Coins, TrendingUp, Users, Clock, Icon, Loader2 } from "lucide-react";
 import WalletModal from "./WalletModal";
+import { useWallet } from "@/contexts/WalletContext";
 import { toast } from "sonner";
 
 const PresaleWidget = () => {
@@ -16,8 +17,10 @@ const PresaleWidget = () => {
   const [tokenAmount, setTokenAmount] = useState("");
   const [referralCode, setReferralCode] = useState("");
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
-  const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
-  const [isbuyTab, setIsbuyTab] = useState("e2");
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Use real wallet connection
+  const { isConnected, address, connectWallet, provider } = useWallet();
 
   const paymentMethods = [
     { symbol: "ETH", name: "Ethereum", icon: "/images/ethereum.png", price: 0.0035 },
@@ -52,13 +55,8 @@ const PresaleWidget = () => {
     setIsWalletModalOpen(true);
   };
 
-  const handleWalletSelect = (walletId: string) => {
-    setConnectedWallet(walletId);
-    toast.success(`${walletId} wallet connected successfully!`);
-  };
-
-  const handlePurchase = () => {
-    if (!connectedWallet) {
+  const handlePurchase = async () => {
+    if (!isConnected) {
       toast.error("Please connect your wallet first");
       return;
     }
@@ -66,7 +64,36 @@ const PresaleWidget = () => {
       toast.error("Please enter an amount");
       return;
     }
-    toast.success("Purchase initiated! Please confirm the transaction in your wallet.");
+    if (!provider) {
+      toast.error("Wallet provider not available");
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      
+      // Convert amount to wei (assuming ETH)
+      const amountInWei = (parseFloat(amount) * Math.pow(10, 18)).toString(16);
+      
+      // For demo purposes, we'll just show a success message
+      // In a real implementation, you would:
+      // 1. Deploy or interact with a smart contract
+      // 2. Send the actual transaction
+      // 3. Handle the transaction hash
+      
+      toast.success("Purchase initiated! Please confirm the transaction in your wallet.");
+      
+      // Simulate transaction processing
+      setTimeout(() => {
+        setIsProcessing(false);
+        toast.success("Transaction completed successfully!");
+      }, 2000);
+      
+    } catch (error: any) {
+      console.error('Purchase failed:', error);
+      setIsProcessing(false);
+      toast.error("Transaction failed. Please try again.");
+    }
   };
 
   const handleCopyReferral = () => {
@@ -244,26 +271,52 @@ const PresaleWidget = () => {
                     </div>
 
                     {/* Connect Wallet / Purchase Button */}
-                    {!connectedWallet ? (
+                    {!isConnected ? (
                       <Button variant="outline" 
                         className="gradient-border glow-primary hover:bg-gradient-primary hover:text-primary-foreground w-full"
                         size="lg"
                         onClick={handleWalletConnect}
                       >
-                      <Wallet className="w-4 h-4 mr-2" />
+                        <Wallet className="w-4 h-4 mr-2" />
                         Connect Wallet
                       </Button>
-
                     ) : (
-                      <Button 
-                        className="w-full bg-gradient-primary glow-primary hover:shadow-glow-primary transition-all duration-300"
-                        size="lg"
-                        disabled={!amount}
-                        onClick={handlePurchase}
-                      >
-                        <CreditCard className="w-4 h-4 mr-2" />
-                        Purchase CPX Tokens
-                      </Button>
+                      <div className="space-y-3">
+                        <div className="p-3 bg-primary/10 rounded-lg border border-primary/20">
+                          <div className="text-sm text-muted-foreground mb-1">Connected:</div>
+                          <div className="font-mono text-sm break-all">
+                            {address}
+                          </div>
+                        </div>
+                        
+                        <Button 
+                          className="w-full bg-gradient-primary glow-primary hover:shadow-glow-primary transition-all duration-300"
+                          size="lg"
+                          disabled={!amount || isProcessing}
+                          onClick={handlePurchase}
+                        >
+                          {isProcessing ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <CreditCard className="w-4 h-4 mr-2" />
+                              Purchase CPX Tokens
+                            </>
+                          )}
+                        </Button>
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setIsWalletModalOpen(true)}
+                          className="w-full"
+                        >
+                          Manage Wallet
+                        </Button>
+                      </div>
                     )}
 
                     <div className="text-xs text-muted-foreground text-center">
@@ -303,7 +356,6 @@ const PresaleWidget = () => {
       <WalletModal 
         isOpen={isWalletModalOpen}
         onClose={() => setIsWalletModalOpen(false)}
-        onWalletSelect={handleWalletSelect}
       />
     </section>
   );

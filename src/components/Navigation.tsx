@@ -109,7 +109,7 @@ const Navigation = () => {
       <WalletModal 
         isOpen={isWalletModalOpen}
         onClose={() => setIsWalletModalOpen(false)}
-        onWalletSelect={handleWalletSelect}
+        // onWalletSelect={handleWalletSelect}
       />
     </nav>
   );
