@@ -104,7 +104,7 @@ const PresaleWidget = () => {
   return (
     <section id="presale" className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="outline" className="mb-4 px-4 py-2 glow-accent animate-pulse-glow">
               <TrendingUp className="w-4 h-4 mr-2" />
@@ -149,13 +149,13 @@ const PresaleWidget = () => {
 
                 {/* Current Stats */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-primary/20 rounded-lg glow-accent">
+                  <div className="text-center p-4 bg-primary/20 rounded-lg">
                     <div>
                       <div className="text-2xl font-bold text-gradient">${presaleData.currentPrice}</div>
                       <div className="text-sm text-muted-foreground">Current Price</div>
                     </div>
                   </div>
-                  <div className="text-center p-4 bg-primary/20 rounded-lg glow-accent animate-pulse-glow">
+                  <div className="text-center p-4 bg-primary/20 rounded-lg glow-primary animate-pulse-glow">
                     <div className="text-2xl font-bold text-gradient">${presaleData.nextPrice}</div>
                     <div className="text-sm text-muted-foreground">Next Stage</div>
                   </div>

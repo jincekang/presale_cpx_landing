@@ -42,7 +42,7 @@ const FAQSection = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Get your questions answered about Carbon Pepe X</p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((item, idx) => (
               <AccordionItem key={idx} value={`item-${idx}`} className="border border-border border-b-0 rounded-lg bg-card shadow-card-3 overflow-hidden">
