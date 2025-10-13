@@ -39,7 +39,6 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-5 mr-1 flex items-baseline space-x-8">
               {navItems.map((item) => (
