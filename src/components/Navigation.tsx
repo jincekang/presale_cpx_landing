@@ -53,7 +53,6 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* Connect Wallet Button */}
           <div className="hidden md:block">
             <Button variant="outline" className="gradient-border glow-primary hover:bg-gradient-primary hover:text-primary-foreground w-full"
               onClick={handleWalletConnect}>
